@@ -1,10 +1,10 @@
-const MY_QUERY = 'subject:(You have a new booking) ';
+const QUERY_YAMATO = 'subject:(You have a new booking) ';
 
 function main() {
-  pickUpMessage(MY_QUERY, function (message) {
+  pickUpMessage(QUERY_YAMATO, function (message) {
     parseFortyTow(message);
   });
-}F
+}
 
 function pickUpMessage(query, callback) {
   const messages = getMail(query);
@@ -55,16 +55,14 @@ function parseFortyTow(message) {
 
   //console.log(strMessage);
   //console.log(strMessageSub[4]);
-  //console.log(strWord);
   
-  var indexOfFrom = strWord.findIndex((element) => element == "from");
   var dataMonth = {January:1, February:2, March:3, April:4, May:5, June:6, July:7, August:8, September:9, October:10, November:11, December:12};
   const year = new Date().getFullYear();
-  const month = dataMonth[strWord[indexOfFrom + 1]];
-  const dayOfMonth = parseInt(strWord[indexOfFrom + 2], 10);
-  var startTimeHour = parseInt(strWord[indexOfFrom + 4], 10);
-  var startTimeMinutes = parseInt(strWord[indexOfFrom + 4].substr(3), 10);
-  var needMinutes = parseInt(strWord[indexOfFrom + 6]) + 30;
+  const month = dataMonth[strWord[7]];
+  const dayOfMonth = parseInt(strWord[8], 10);
+  var startTimeHour = parseInt(strWord[10], 10);
+  var startTimeMinutes = parseInt(strWord[10].substr(3), 10);
+  var needMinutes = parseInt(strWord[12]);
   var endTimeHour;
   var endTimeMinutes;
   if (startTimeHour == 23 && startTimeMinutes + needMinutes >= 60){
